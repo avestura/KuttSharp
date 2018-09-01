@@ -36,7 +36,7 @@ namespace KuttSharp.Models
         /// The amount of visits to this URL
         /// </summary>
         [JsonProperty("count")]
-        public long Count { get; set; }
+        public long Visits { get; set; }
 
         /// <summary>
         /// The shortened link (Usually https://kutt.it/id)
