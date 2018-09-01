@@ -17,7 +17,9 @@ namespace KuttSharp
         private static readonly HttpClient client = new HttpClient();
 
         private const string SubmitUrl = "https://kutt.it/api/url/submit";
-        private const string GetAllUrl = "https://kutt.it/api/url/submit";
+        private const string GetAllUrl = "https://kutt.it/api/url/geturls";
+        private const string DeleteUrl = "https://kutt.it/api/url/deleteurl";
+        private const string GetStatsUrl = "https://kutt.it/api/url/stats";
 
         private readonly JsonSerializerSettings jsonSettings = new JsonSerializerSettings()
         {
@@ -154,23 +156,20 @@ namespace KuttSharp
         /// </summary>
         /// <param name="id">ID of the shortened URL</param>
         /// <param name="domain"> Required if a custom domain is used for short URL</param>
-        public async Task GetStatsAsync(string id, string domain = "")
+        public async Task<UrlStats> GetStatsAsync(string id, string domain = "")
         {
-            var values = new Dictionary<string, string>
-            {
-                ["id"] = id
-            };
+            var requestUrl = $"{GetStatsUrl}?id={id}";
+            requestUrl += (domain.Length > 0) ? $"&domain={domain}" : "";
 
-            if (domain?.Length > 0)
-                values.Add("domain", domain);
-
-            var body = new FormUrlEncodedContent(values);
-
-            var response = await client.PostAsync(SubmitUrl, body).ConfigureAwait(false);
+            var response = await client.GetAsync(requestUrl).ConfigureAwait(false);
 
             var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-            if (!response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<UrlStats>(responseString);
+            }
+            else
             {
                 try
                 {
