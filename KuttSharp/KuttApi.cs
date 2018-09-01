@@ -132,7 +132,7 @@ namespace KuttSharp
 
             var body = new FormUrlEncodedContent(values);
 
-            var response = await client.PostAsync(SubmitUrl, body).ConfigureAwait(false);
+            var response = await client.PostAsync(DeleteUrl, body).ConfigureAwait(false);
 
             var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
