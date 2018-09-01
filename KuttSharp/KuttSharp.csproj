@@ -10,6 +10,9 @@
     <PackageProjectUrl>https://github.com/0xaryan/KuttSharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/0xaryan/KuttSharp</RepositoryUrl>
     <PackageTags>netstandard, csharp, url-shortener</PackageTags>
+    <Copyright>MIT License</Copyright>
+    <PackageLicenseUrl>https://github.com/0xaryan/KuttSharp/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryType>Public</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
