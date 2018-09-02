@@ -2,7 +2,8 @@
 .NET Package for kutt.it url shortener
 
 ## Installation
-[![NuGet](https://img.shields.io/nuget/dt/KuttSharp.svg)](https://www.nuget.org/packages/KuttSharp)
+![NuGet](https://img.shields.io/nuget/v/kuttsharp.svg)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/KuttSharp.svg)](https://www.nuget.org/packages/KuttSharp)
 
 Simply add `KuttSharp` nuget package to your project
 
