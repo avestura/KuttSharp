@@ -43,7 +43,7 @@ Console.WriteLine($"First item visits count: {list[0].Visits}");
 ```csharp
 var stats = await api.GetStatsAsync(id: "url_id");
 
-Console.WriteLine(x.LastWeek.ClientStats.Referrer[0].Name);
+Console.WriteLine(stats.LastWeek.ClientStats.Referrer[0].Name);
 ```
 
 ## Error handling
