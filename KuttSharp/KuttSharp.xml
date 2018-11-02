@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>KuttSharp</name>
+    </assembly>
+    <members>
+        <member name="T:KuttSharp.KuttApi">
+            <summary>
+            Provides an interface for calling Kutt.it url shortening services
+            </summary>
+        </member>
+        <member name="M:KuttSharp.KuttApi.SubmitAsync(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Submit a link to be shortened
+            </summary>
+            <param name="target">Original long URL to be shortened</param>
+            <param name="customUrl">Set a custom URL</param>
+            <param name="password">Set a password</param>
+            <param name="reuse">If a URL with the specified target exists returns it, otherwise will send a new shortened URL. Default is false.</param>
+            <returns>Submitted url as a <see cref="T:KuttSharp.Models.KuttUrl"/></returns>
+        </member>
+        <member name="M:KuttSharp.KuttApi.GetUrlsAsync">
+            <summary>
+            Get shortened URLs list
+            </summary>
+            <returns>List of URL objects</returns>
+        </member>
+        <member name="M:KuttSharp.KuttApi.DeleteAsync(System.String,System.String)">
+            <summary>
+            Delete a shortened URL
+            </summary>
+            <param name="id">ID of the shortened URL</param>
+            <param name="domain"> Required if a custom domain is used for short URL</param>
+        </member>
+        <member name="M:KuttSharp.KuttApi.GetStatsAsync(System.String,System.String)">
+            <summary>
+            Get stats for a shortened URL
+            </summary>
+            <param name="id">ID of the shortened URL</param>
+            <param name="domain"> Required if a custom domain is used for short URL</param>
+        </member>
+        <member name="T:KuttSharp.KuttException">
+            <summary>
+            Exceptions that are related to Kutt Api
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.KuttError.Error">
+            <summary>
+            Error returned from server
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.KuttUrl.Id">
+            <summary>
+            Unique ID of the URL
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.KuttUrl.CreatedAt">
+            <summary>
+            DateTime of when the URL was created
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.KuttUrl.Target">
+            <summary>
+            Where the URL will redirect to
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.KuttUrl.IsPasswordRequired">
+            <summary>
+            Whether or not a password is required
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.KuttUrl.Visits">
+            <summary>
+            The amount of visits to this URL
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.KuttUrl.ShortUrl">
+            <summary>
+            The shortened link (Usually https://kutt.it/id)
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.KuttUrlList.Urls">
+            <summary>
+            List of Url objects
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.KuttUrlList.CountAll">
+            <summary>
+            Amount of items in the list
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.ClientStats.Browser">
+            <summary>
+            Indicates with what browsers clients visited your link
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.ClientStats.OperatingSystem">
+            <summary>
+            Indicates with what operating systems clients visited your link
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.ClientStats.Country">
+            <summary>
+            Indicates from what countries users visited your link
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.ClientStats.Referrer">
+            <summary>
+            Indicates from what urls users refered to your link
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.Stats.NameValueStats.Name">
+            <summary>
+            Name of the stats item
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.Stats.NameValueStats.Value">
+            <summary>
+            Value of the stats item
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.StatsSection.ClientStats">
+            <summary>
+            Stats related to client (e.g. browser, OS, country...)
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.StatsSection.ViewStats">
+            <summary>
+            Number of views for the past hours, days or months based on the stats context
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.UrlStats.Id">
+            <summary>
+            Id of the shortened url
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.UrlStats.TotalClicks">
+            <summary>
+            Total clicks on the shortened link
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.UrlStats.ShortUrl">
+            <summary>
+            Shortened version of the original url
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.UrlStats.Target">
+            <summary>
+            The original long version of the shortened url
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.UrlStats.LastDay">
+            <summary>
+            Stats of the last day
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.UrlStats.LastWeek">
+            <summary>
+            Stats of the last week
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.UrlStats.LastMonth">
+            <summary>
+            Stats of the last month
+            </summary>
+        </member>
+        <member name="P:KuttSharp.Models.UrlStats.AllTime">
+            <summary>
+            Stats for all time
+            </summary>
+        </member>
+    </members>
+</doc>

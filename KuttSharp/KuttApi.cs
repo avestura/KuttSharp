@@ -82,7 +82,6 @@ namespace KuttSharp
                     throw;
                 }
             }
-
         }
 
         /// <summary>
@@ -91,7 +90,6 @@ namespace KuttSharp
         /// <returns>List of URL objects</returns>
         public async Task<List<KuttUrl>> GetUrlsAsync()
         {
-
             var response = await client.GetAsync(GetAllUrl).ConfigureAwait(false);
 
             var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -112,7 +110,6 @@ namespace KuttSharp
                     throw;
                 }
             }
-
         }
 
         /// <summary>
@@ -148,7 +145,6 @@ namespace KuttSharp
                     throw;
                 }
             }
-
         }
 
         /// <summary>
@@ -181,7 +177,6 @@ namespace KuttSharp
                     throw;
                 }
             }
-
         }
     }
 }

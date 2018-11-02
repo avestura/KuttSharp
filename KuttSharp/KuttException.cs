@@ -4,9 +4,12 @@ using System.Text;
 
 namespace KuttSharp
 {
+    /// <summary>
+    /// Exceptions that are related to Kutt Api
+    /// </summary>
     public class KuttException : Exception
     {
-        public KuttException() : base()
+        public KuttException()
         {
         }
 
