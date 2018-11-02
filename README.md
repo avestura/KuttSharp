@@ -2,7 +2,8 @@
 .NET Package for kutt.it url shortener
 
 ## Installation
-[![NuGet](https://img.shields.io/nuget/dt/KuttSharp.svg)](https://www.nuget.org/packages/KuttSharp)
+[![NuGet](https://img.shields.io/nuget/v/kuttsharp.svg)](https://www.nuget.org/packages/KuttSharp)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/KuttSharp.svg)](https://www.nuget.org/packages/KuttSharp)
 
 Simply add `KuttSharp` nuget package to your project
 
@@ -42,7 +43,7 @@ Console.WriteLine($"First item visits count: {list[0].Visits}");
 ```csharp
 var stats = await api.GetStatsAsync(id: "url_id");
 
-Console.WriteLine(x.LastWeek.ClientStats.Referrer[0].Name);
+Console.WriteLine(stats.LastWeek.ClientStats.Referrer[0].Name);
 ```
 
 ## Error handling
