@@ -85,7 +85,7 @@ namespace KuttSharp
         }
 
         /// <summary>
-        /// Get shortened URLs list
+        /// Get the shortened URLs list
         /// </summary>
         /// <returns>List of URL objects</returns>
         public async Task<List<KuttUrl>> GetUrlsAsync()
