@@ -16,8 +16,16 @@
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>$(IntermediateOutputPath)$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectCapability Include="GenerateDocumentationFile" />
+  </ItemGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>E:\Project\C# Desktop\Kutt\KuttSharp\KuttSharp\KuttSharp.xml</DocumentationFile>
     <Optimize>true</Optimize>
     <NoWarn>1591;1701;1702</NoWarn>
   </PropertyGroup>
