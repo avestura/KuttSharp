@@ -16,21 +16,64 @@ namespace KuttSharp
     {
         private static readonly HttpClient client = new HttpClient();
 
-        private const string SubmitUrl = "https://kutt.it/api/url/submit";
-        private const string GetAllUrl = "https://kutt.it/api/url/geturls";
-        private const string DeleteUrl = "https://kutt.it/api/url/deleteurl";
-        private const string GetStatsUrl = "https://kutt.it/api/url/stats";
+        private const string KuttDefaultServer = "https://kutt.it";
+
+        private const string SubmitUrlShape   = "{0}/api/url/submit";
+        private const string GetAllUrlShape   = "{0}/api/url/geturls";
+        private const string DeleteUrlShape   = "{0}/api/url/deleteurl";
+        private const string GetStatsUrlShape = "{0}/api/url/stats";
 
         private readonly JsonSerializerSettings jsonSettings = new JsonSerializerSettings()
         {
             Converters = { new IsoDateTimeConverter() }
         };
 
+        private Uri SubmitUri   => new Uri(string.Format(SubmitUrlShape,   KuttServer.OriginalString));
+        private Uri GetAllUri   => new Uri(string.Format(GetAllUrlShape,   KuttServer.OriginalString));
+        private Uri DeleteUri   => new Uri(string.Format(DeleteUrlShape,   KuttServer.OriginalString));
+        private Uri GetStatsUri => new Uri(string.Format(GetStatsUrlShape, KuttServer.OriginalString));
+
+        /// <summary>
+        /// Determines the server that the requests send to
+        /// </summary>
+        public Uri KuttServer { get; }
+
         public string ApiKey { get; }
 
+        /// <summary>
+        /// Creates an Api which communicates with the default Kutt server
+        /// </summary>
+        /// <param name="apiKey"></param>
         public KuttApi(string apiKey)
         {
             ApiKey = apiKey ?? throw new ArgumentNullException(nameof(apiKey));
+            KuttServer = new Uri(KuttDefaultServer);
+
+            client.DefaultRequestHeaders.Add("X-API-Key", apiKey);
+        }
+
+        /// <summary>
+        /// Creates an Api which communicates with a self-hosted Kutt server
+        /// </summary>
+        /// <param name="apiKey"></param>
+        /// <param name="server">Determines the server that the requests send to</param>
+        public KuttApi(string apiKey, Uri server)
+        {
+            ApiKey = apiKey ?? throw new ArgumentNullException(nameof(apiKey));
+            KuttServer = server ?? throw new ArgumentNullException(nameof(server));
+
+            client.DefaultRequestHeaders.Add("X-API-Key", apiKey);
+        }
+
+        /// <summary>
+        /// Creates an Api which communicates with a self-hosted Kutt server
+        /// </summary>
+        /// <param name="apiKey"></param>
+        /// <param name="server">Determines the server that the requests send to</param>
+        public KuttApi(string apiKey, string server)
+        {
+            ApiKey = apiKey ?? throw new ArgumentNullException(nameof(apiKey));
+            KuttServer = new Uri(server);
 
             client.DefaultRequestHeaders.Add("X-API-Key", apiKey);
         }
@@ -62,7 +105,7 @@ namespace KuttSharp
 
             var body = new FormUrlEncodedContent(values);
 
-            var response = await client.PostAsync(SubmitUrl, body).ConfigureAwait(false);
+            var response = await client.PostAsync(SubmitUri, body).ConfigureAwait(false);
 
             var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
@@ -90,7 +133,7 @@ namespace KuttSharp
         /// <returns>List of URL objects</returns>
         public async Task<List<KuttUrl>> GetUrlsAsync()
         {
-            var response = await client.GetAsync(GetAllUrl).ConfigureAwait(false);
+            var response = await client.GetAsync(GetAllUri).ConfigureAwait(false);
 
             var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
@@ -129,7 +172,7 @@ namespace KuttSharp
 
             var body = new FormUrlEncodedContent(values);
 
-            var response = await client.PostAsync(DeleteUrl, body).ConfigureAwait(false);
+            var response = await client.PostAsync(DeleteUri, body).ConfigureAwait(false);
 
             var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
@@ -154,7 +197,7 @@ namespace KuttSharp
         /// <param name="domain"> Required if a custom domain is used for short URL</param>
         public async Task<UrlStats> GetStatsAsync(string id, string domain = "")
         {
-            var requestUrl = $"{GetStatsUrl}?id={id}";
+            var requestUrl = $"{GetStatsUri}?id={id}";
             requestUrl += (domain.Length > 0) ? $"&domain={domain}" : "";
 
             var response = await client.GetAsync(requestUrl).ConfigureAwait(false);
