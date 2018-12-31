@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Runtime.Serialization;
 
 namespace KuttSharp
 {
@@ -9,20 +8,12 @@ namespace KuttSharp
     /// </summary>
     public class KuttException : Exception
     {
-        public KuttException()
-        {
-        }
+        public KuttException(){}
 
-        protected KuttException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context)
-        {
-        }
+        protected KuttException(SerializationInfo info,StreamingContext context) : base(info, context){}
 
-        public KuttException(string message) : base(message)
-        {
-        }
+        public KuttException(string message) : base(message){}
 
-        public KuttException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
+        public KuttException(string message, Exception innerException) : base(message, innerException){}
     }
 }
