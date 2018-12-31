@@ -9,6 +9,31 @@
             Provides an interface for calling Kutt.it url shortening services
             </summary>
         </member>
+        <member name="P:KuttSharp.KuttApi.KuttServer">
+            <summary>
+            Determines the server that the requests send to
+            </summary>
+        </member>
+        <member name="M:KuttSharp.KuttApi.#ctor(System.String)">
+            <summary>
+            Creates an Api which communicates with the default Kutt server
+            </summary>
+            <param name="apiKey"></param>
+        </member>
+        <member name="M:KuttSharp.KuttApi.#ctor(System.String,System.Uri)">
+            <summary>
+            Creates an Api which communicates with a self-hosted Kutt server
+            </summary>
+            <param name="apiKey"></param>
+            <param name="server">Determines the server that the requests send to</param>
+        </member>
+        <member name="M:KuttSharp.KuttApi.#ctor(System.String,System.String)">
+            <summary>
+            Creates an Api which communicates with a self-hosted Kutt server
+            </summary>
+            <param name="apiKey"></param>
+            <param name="server">Determines the server that the requests send to</param>
+        </member>
         <member name="M:KuttSharp.KuttApi.SubmitAsync(System.String,System.String,System.String,System.Boolean)">
             <summary>
             Submit a link to be shortened
