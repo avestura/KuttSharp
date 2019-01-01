@@ -11,7 +11,11 @@ Simply add `KuttSharp` nuget package to your project
 ## API
 First create a new instance of `KuttApi` then use examples below:
 ```csharp
+// Use defualt Kutt server
 var api = new KuttApi("apiKey");
+
+// Use a self-hosted Kutt server as string or System.Uri
+var api = new KuttApi("apiKey", "https://MyOwnSelfHostedKutt.it")
 ```
 #### Submit
 ```csharp
