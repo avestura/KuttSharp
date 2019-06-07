@@ -48,8 +48,8 @@ namespace KuttSharp
         {
             ApiKey = apiKey ?? throw new ArgumentNullException(nameof(apiKey));
             KuttServer = new Uri(KuttDefaultServer);
-
-            client.DefaultRequestHeaders.Add("X-API-Key", apiKey);
+            if (!client.DefaultRequestHeaders.Contains("X-API-Key"))
+                client.DefaultRequestHeaders.Add("X-API-Key", apiKey);
         }
 
         /// <summary>
@@ -61,8 +61,8 @@ namespace KuttSharp
         {
             ApiKey = apiKey ?? throw new ArgumentNullException(nameof(apiKey));
             KuttServer = server ?? throw new ArgumentNullException(nameof(server));
-
-            client.DefaultRequestHeaders.Add("X-API-Key", apiKey);
+            if (!client.DefaultRequestHeaders.Contains("X-API-Key"))
+                client.DefaultRequestHeaders.Add("X-API-Key", apiKey);
         }
 
         /// <summary>
@@ -74,8 +74,8 @@ namespace KuttSharp
         {
             ApiKey = apiKey ?? throw new ArgumentNullException(nameof(apiKey));
             KuttServer = new Uri(server);
-
-            client.DefaultRequestHeaders.Add("X-API-Key", apiKey);
+            if (!client.DefaultRequestHeaders.Contains("X-API-Key"))
+                client.DefaultRequestHeaders.Add("X-API-Key", apiKey);
         }
 
         /// <summary>
