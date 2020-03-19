@@ -14,31 +14,17 @@ namespace KuttSharp
     /// </summary>
     public class KuttApi
     {
-        private static readonly HttpClient client = new HttpClient();
-
         private const string KuttDefaultServer = "https://kutt.it";
-
-        private const string SubmitUrlShape   = "{0}/api/url/submit";
-        private const string GetAllUrlShape   = "{0}/api/url/geturls";
-        private const string DeleteUrlShape   = "{0}/api/url/deleteurl";
+        private const string SubmitUrlShape = "{0}/api/url/submit";
+        private const string GetAllUrlShape = "{0}/api/url/geturls";
+        private const string DeleteUrlShape = "{0}/api/url/deleteurl";
         private const string GetStatsUrlShape = "{0}/api/url/stats";
+        private static HttpClient Client = new HttpClient();
 
         private readonly JsonSerializerSettings jsonSettings = new JsonSerializerSettings()
         {
             Converters = { new IsoDateTimeConverter() }
         };
-
-        private Uri SubmitUri   => new Uri(string.Format(SubmitUrlShape,   KuttServer.OriginalString));
-        private Uri GetAllUri   => new Uri(string.Format(GetAllUrlShape,   KuttServer.OriginalString));
-        private Uri DeleteUri   => new Uri(string.Format(DeleteUrlShape,   KuttServer.OriginalString));
-        private Uri GetStatsUri => new Uri(string.Format(GetStatsUrlShape, KuttServer.OriginalString));
-
-        /// <summary>
-        /// Determines the server that the requests send to
-        /// </summary>
-        public Uri KuttServer { get; }
-
-        public string ApiKey { get; }
 
         /// <summary>
         /// Creates an Api which communicates with the default Kutt server
@@ -48,8 +34,8 @@ namespace KuttSharp
         {
             ApiKey = apiKey ?? throw new ArgumentNullException(nameof(apiKey));
             KuttServer = new Uri(KuttDefaultServer);
-            if (!client.DefaultRequestHeaders.Contains("X-API-Key"))
-                client.DefaultRequestHeaders.Add("X-API-Key", apiKey);
+            if (!Client.DefaultRequestHeaders.Contains("X-API-Key"))
+                Client.DefaultRequestHeaders.Add("X-API-Key", apiKey);
         }
 
         /// <summary>
@@ -61,8 +47,8 @@ namespace KuttSharp
         {
             ApiKey = apiKey ?? throw new ArgumentNullException(nameof(apiKey));
             KuttServer = server ?? throw new ArgumentNullException(nameof(server));
-            if (!client.DefaultRequestHeaders.Contains("X-API-Key"))
-                client.DefaultRequestHeaders.Add("X-API-Key", apiKey);
+            if (!Client.DefaultRequestHeaders.Contains("X-API-Key"))
+                Client.DefaultRequestHeaders.Add("X-API-Key", apiKey);
         }
 
         /// <summary>
@@ -74,9 +60,54 @@ namespace KuttSharp
         {
             ApiKey = apiKey ?? throw new ArgumentNullException(nameof(apiKey));
             KuttServer = new Uri(server);
-            if (!client.DefaultRequestHeaders.Contains("X-API-Key"))
-                client.DefaultRequestHeaders.Add("X-API-Key", apiKey);
+            if (!Client.DefaultRequestHeaders.Contains("X-API-Key"))
+                Client.DefaultRequestHeaders.Add("X-API-Key", apiKey);
         }
+
+        /// <summary>
+        /// Creates an Api which communicates with a self-hosted Kutt server
+        /// </summary>
+        /// <param name="apiKey"></param>
+        /// <param name="server">Determines the server that the requests send to</param>
+        /// <param name="client">Use custom httpClient for request (useful for proxy or other modifications to the client handler)</param>
+        public KuttApi(string apiKey, string server, HttpClient client)
+        {
+            ApiKey = apiKey ?? throw new ArgumentNullException(nameof(apiKey));
+            KuttServer = new Uri(server);
+            Client = client ?? throw new ArgumentNullException(nameof(client));
+            if (!Client.DefaultRequestHeaders.Contains("X-API-Key"))
+                Client.DefaultRequestHeaders.Add("X-API-Key", apiKey);
+        }
+
+        /// <summary>
+        /// Creates an Api which communicates with a self-hosted Kutt server
+        /// </summary>
+        /// <param name="apiKey"></param>
+        /// <param name="server">Determines the server that the requests send to</param>
+        /// <param name="client">Use custom httpClient for request (useful for proxy or other modifications to the client handler)</param>
+        public KuttApi(string apiKey, Uri server, HttpClient client)
+        {
+            ApiKey = apiKey ?? throw new ArgumentNullException(nameof(apiKey));
+            KuttServer = server ?? throw new ArgumentNullException(nameof(server));
+            Client = client ?? throw new ArgumentNullException(nameof(client));
+            if (!Client.DefaultRequestHeaders.Contains("X-API-Key"))
+                Client.DefaultRequestHeaders.Add("X-API-Key", apiKey);
+        }
+
+        /// <summary>
+        /// Determines the server that the requests send to
+        /// </summary>
+        public Uri KuttServer { get; }
+
+        /// <summary>
+        /// ApiKey used to authorize requests to the KuttServer service
+        /// </summary>
+        public string ApiKey { get; }
+
+        private Uri SubmitUri => new Uri(string.Format(SubmitUrlShape, KuttServer.OriginalString));
+        private Uri GetAllUri => new Uri(string.Format(GetAllUrlShape, KuttServer.OriginalString));
+        private Uri DeleteUri => new Uri(string.Format(DeleteUrlShape, KuttServer.OriginalString));
+        private Uri GetStatsUri => new Uri(string.Format(GetStatsUrlShape, KuttServer.OriginalString));
 
         /// <summary>
         /// Submit a link to be shortened
@@ -105,7 +136,7 @@ namespace KuttSharp
 
             var body = new FormUrlEncodedContent(values);
 
-            var response = await client.PostAsync(SubmitUri, body).ConfigureAwait(false);
+            var response = await Client.PostAsync(SubmitUri, body).ConfigureAwait(false);
 
             var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
@@ -133,7 +164,7 @@ namespace KuttSharp
         /// <returns>List of URL objects</returns>
         public async Task<List<KuttUrl>> GetUrlsAsync()
         {
-            var response = await client.GetAsync(GetAllUri).ConfigureAwait(false);
+            var response = await Client.GetAsync(GetAllUri).ConfigureAwait(false);
 
             var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
@@ -172,7 +203,7 @@ namespace KuttSharp
 
             var body = new FormUrlEncodedContent(values);
 
-            var response = await client.PostAsync(DeleteUri, body).ConfigureAwait(false);
+            var response = await Client.PostAsync(DeleteUri, body).ConfigureAwait(false);
 
             var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
@@ -200,7 +231,7 @@ namespace KuttSharp
             var requestUrl = $"{GetStatsUri}?id={id}";
             requestUrl += (domain.Length > 0) ? $"&domain={domain}" : "";
 
-            var response = await client.GetAsync(requestUrl).ConfigureAwait(false);
+            var response = await Client.GetAsync(requestUrl).ConfigureAwait(false);
 
             var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
