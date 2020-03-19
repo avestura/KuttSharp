@@ -9,11 +9,6 @@
             Provides an interface for calling Kutt.it url shortening services
             </summary>
         </member>
-        <member name="P:KuttSharp.KuttApi.KuttServer">
-            <summary>
-            Determines the server that the requests send to
-            </summary>
-        </member>
         <member name="M:KuttSharp.KuttApi.#ctor(System.String)">
             <summary>
             Creates an Api which communicates with the default Kutt server
@@ -33,6 +28,32 @@
             </summary>
             <param name="apiKey"></param>
             <param name="server">Determines the server that the requests send to</param>
+        </member>
+        <member name="M:KuttSharp.KuttApi.#ctor(System.String,System.String,System.Net.Http.HttpClient)">
+            <summary>
+            Creates an Api which communicates with a self-hosted Kutt server
+            </summary>
+            <param name="apiKey"></param>
+            <param name="server">Determines the server that the requests send to</param>
+            <param name="client">Use custom httpClient for request (useful for proxy or other modifications to the client handler)</param>
+        </member>
+        <member name="M:KuttSharp.KuttApi.#ctor(System.String,System.Uri,System.Net.Http.HttpClient)">
+            <summary>
+            Creates an Api which communicates with a self-hosted Kutt server
+            </summary>
+            <param name="apiKey"></param>
+            <param name="server">Determines the server that the requests send to</param>
+            <param name="client">Use custom httpClient for request (useful for proxy or other modifications to the client handler)</param>
+        </member>
+        <member name="P:KuttSharp.KuttApi.KuttServer">
+            <summary>
+            Determines the server that the requests send to
+            </summary>
+        </member>
+        <member name="P:KuttSharp.KuttApi.ApiKey">
+            <summary>
+            ApiKey used to authorize requests to the KuttServer service
+            </summary>
         </member>
         <member name="M:KuttSharp.KuttApi.SubmitAsync(System.String,System.String,System.String,System.Boolean)">
             <summary>
