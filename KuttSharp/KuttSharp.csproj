@@ -3,15 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Version>0.4.0</Version>
-    <Authors>0xaryan</Authors>
+    <Authors>avestura</Authors>
     <Description>.NET Package for kutt.it url shortener</Description>
     <PackageIcon>kuttlogo.png</PackageIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageProjectUrl>https://github.com/0xaryan/KuttSharp</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/0xaryan/KuttSharp</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/avestura/KuttSharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/avestura/KuttSharp</RepositoryUrl>
     <PackageTags>netstandard, csharp, url-shortener</PackageTags>
     <Copyright>MIT License</Copyright>
-    <PackageLicense>https://github.com/0xaryan/KuttSharp/blob/master/LICENSE</PackageLicense>
+    <PackageLicense>https://github.com/avestura/KuttSharp/blob/master/LICENSE</PackageLicense>
     <RepositoryType>Public</RepositoryType>
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
