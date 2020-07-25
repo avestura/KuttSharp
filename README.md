@@ -4,7 +4,7 @@
 ## Installation
 [![NuGet](https://img.shields.io/nuget/v/kuttsharp.svg)](https://www.nuget.org/packages/KuttSharp)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/KuttSharp.svg)](https://www.nuget.org/packages/KuttSharp)
-[![Build status](https://dev.azure.com/0xaryan/KuttSharp/_apis/build/status/KuttSharp-.NET%20Desktop-CI)](https://dev.azure.com/0xaryan/KuttSharp/_build/latest?definitionId=8)
+[![Build status](https://dev.azure.com/Avestura/KuttSharp/_apis/build/status/KuttSharp-.NET%20Desktop-CI)](https://dev.azure.com/Avestura/KuttSharp/_build/latest?definitionId=8)
 
 Simply add `KuttSharp` nuget package to your project
 
