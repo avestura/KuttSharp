@@ -4,7 +4,7 @@ using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Security;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace KuttSharp
@@ -122,10 +122,10 @@ namespace KuttSharp
             string password = "",
             bool reuse = false)
         {
-            var values = new Dictionary<string, string>
+            var values = new Dictionary<string, object>
             {
                 ["target"] = target,
-                ["reuse"] = reuse.ToString()
+                ["reuse"] = reuse
             };
 
             if (customUrl?.Length > 0)
@@ -134,7 +134,7 @@ namespace KuttSharp
             if (password?.Length > 0)
                 values.Add("password", password);
 
-            var body = new FormUrlEncodedContent(values);
+            var body = new StringContent(JsonConvert.SerializeObject(values, jsonSettings), Encoding.UTF8, "application/json");
 
             var response = await Client.PostAsync(SubmitUri, body).ConfigureAwait(false);
 
@@ -193,7 +193,7 @@ namespace KuttSharp
         /// <param name="domain"> Required if a custom domain is used for short URL</param>
         public async Task DeleteAsync(string id, string domain = "")
         {
-            var values = new Dictionary<string, string>
+            var values = new Dictionary<string, object>
             {
                 ["id"] = id
             };
@@ -201,7 +201,7 @@ namespace KuttSharp
             if (domain?.Length > 0)
                 values.Add("domain", domain);
 
-            var body = new FormUrlEncodedContent(values);
+            var body = new StringContent(JsonConvert.SerializeObject(values, jsonSettings), Encoding.UTF8, "application/json");
 
             var response = await Client.PostAsync(DeleteUri, body).ConfigureAwait(false);
 
