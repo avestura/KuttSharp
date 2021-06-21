@@ -122,10 +122,10 @@ namespace KuttSharp
             string password = "",
             bool reuse = false)
         {
-            var values = new Dictionary<string, string>
+            var values = new Dictionary<string, object>
             {
                 ["target"] = target,
-                ["reuse"] = reuse.ToString()
+                ["reuse"] = reuse
             };
 
             if (customUrl?.Length > 0)
