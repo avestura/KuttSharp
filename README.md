@@ -5,7 +5,7 @@
 
 ⚠️ KuttSharp currently only supports v1 of the Kutt API. I have no plans to support v2, therefore you might want to look for an alternative.
 
-ℹ️ Since the newer version of Kutt API uses [OpenAPI](https://www.openapis.org/), the best option probabely would be to just using an OpenAPI client generator.
+ℹ️ Since the newer version of Kutt API uses [OpenAPI](https://www.openapis.org/), the best option probably would be to just use an OpenAPI client generator.
 
 
 ## Installation
