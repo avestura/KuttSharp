@@ -1,6 +1,8 @@
 # KuttSharp
 .NET Package for kutt.it url shortener
 
+⚠️ WARNING: KuttSharp currently only supports v1 of the Kutt API. I have no plans to support v2 currently, therefore you might want to look for an alternative.
+
 ## Installation
 [![NuGet](https://img.shields.io/nuget/v/kuttsharp.svg)](https://www.nuget.org/packages/KuttSharp)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/KuttSharp.svg)](https://www.nuget.org/packages/KuttSharp)
